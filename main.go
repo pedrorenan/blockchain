@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"crypto/sha256"
+	"crypto/sha512"
 	"fmt"
 	. "time"
 )
@@ -15,7 +15,7 @@ type Cryptoblock struct {
 
 func (c *Cryptoblock) BuildHash() {
 	details := bytes.Join([][]byte{c.Data, c.PrevHash}, []byte{})
-	hash := sha256.Sum256(details)
+	hash := sha512.Sum512(details)
 	c.Hash = hash[:]
 }
 
