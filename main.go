@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"fmt"
+	. "time"
 )
 
 type Cryptoblock struct {
@@ -43,6 +44,7 @@ func InitBlockChain() *BlockChain {
 }
 
 func main() {
+	defer TrackTime(Now())
 	chain := InitBlockChain()
 	chain.AddBlock("First Block after inception")
 	chain.AddBlock("Second Block after inception")
@@ -52,4 +54,11 @@ func main() {
 		fmt.Printf("Data in Block: %s\n", block.Data)
 		fmt.Printf("Hash: %x\n", block.Hash)
 	}
+}
+
+func TrackTime(pre Time) Duration {
+	elapsed := Since(pre)
+	fmt.Println("elapsed:", elapsed)
+
+	return elapsed
 }
